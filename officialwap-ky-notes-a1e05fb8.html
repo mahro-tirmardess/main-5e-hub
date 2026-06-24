@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开云 · 知识索引</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f1f3f5;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #1e1e2a;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* ---- header / hero ---- */
+        .hero {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2.8rem 2.4rem;
+            margin-bottom: 2.2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e6e9ed;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.6rem;
+            color: #222;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #4a4e5a;
+            max-width: 640px;
+            margin: 0 auto 0.8rem;
+        }
+
+        .hero .meta-tag {
+            display: inline-block;
+            background: #eef0f2;
+            border-radius: 40px;
+            padding: 0.2rem 1rem;
+            font-size: 0.8rem;
+            color: #4f566b;
+            border: 1px solid #dde1e7;
+        }
+
+        /* ---- 目录卡片网格 ---- */
+        .grid-sections {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.8rem;
+        }
+
+        @media (min-width: 700px) {
+            .grid-sections {
+                grid-template-columns: 1fr 1fr;
+            }
+            .grid-sections .section-card:first-child {
+                grid-column: 1 / -1;
+            }
+            .grid-sections .section-card:last-child {
+                grid-column: 1 / -1;
+            }
+        }
+
+        .section-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 1.8rem 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02), 0 0 0 1px #e3e7ed;
+            transition: box-shadow 0.15s ease;
+        }
+
+        .section-card:hover {
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04), 0 0 0 1px #cfd5de;
+        }
+
+        .section-card .card-title {
+            font-size: 1.2rem;
+            font-weight: 550;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid #eaedf2;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .section-card .card-title small {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #7a7f8e;
+            margin-left: auto;
+        }
+
+        .section-card p,
+        .section-card li {
+            color: #2d3140;
+        }
+
+        .section-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .section-card li {
+            padding: 0.4rem 0 0.4rem 1.2rem;
+            position: relative;
+        }
+
+        .section-card li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #838a9c;
+            font-weight: bold;
+        }
+
+        .topic-badge {
+            display: inline-block;
+            background: #f0f2f6;
+            border-radius: 30px;
+            padding: 0.2rem 1rem;
+            font-size: 0.8rem;
+            border: 1px solid #dde2ea;
+            margin-right: 0.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-note {
+            background: #f7f9fc;
+            border-left: 4px solid #b7bfcc;
+            padding: 1rem 1.4rem;
+            border-radius: 12px;
+            margin: 1rem 0 0.2rem;
+            font-size: 0.95rem;
+            color: #30343f;
+        }
+
+        .link-word {
+            color: #1f2a44;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #bcc3d0;
+            font-weight: 500;
+            transition: color 0.2s, text-decoration-color 0.2s;
+        }
+
+        .link-word:hover {
+            color: #0a0f1f;
+            text-decoration-color: #1f2a44;
+        }
+
+        .faq-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #eef0f4;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 520;
+            margin-bottom: 0.15rem;
+            color: #1b1f2b;
+        }
+
+        .faq-a {
+            color: #434857;
+            font-size: 0.95rem;
+        }
+
+        .footer-note {
+            margin-top: 2.4rem;
+            text-align: center;
+            color: #6e7484;
+            font-size: 0.9rem;
+            padding: 1rem 0 0.4rem;
+            border-top: 1px solid #dfe3ea;
+        }
+
+        .footer-note a {
+            color: #3f475c;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .section-card {
+                padding: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- hero 区域 -->
+    <div class="hero">
+        <h1>开云 · 主题索引</h1>
+        <div class="sub">围绕关键词展开的轻量知识库，聚合背景、场景与关联信息。</div>
+        <span class="meta-tag">方向 · 内容入口</span>
+    </div>
+
+    <!-- 卡片网格：目录式布局 -->
+    <div class="grid-sections">
+        <!-- 全宽卡片：背景与释义 -->
+        <div class="section-card">
+            <div class="card-title">
+                📘 背景与主题
+                <small>context</small>
+            </div>
+            <p>「开云」一词近年来常出现在数字服务、平台生态与品牌命名的语境中。它既指向一种开放、聚合的理念，也常被用作具有识别度的标识。从信息架构的角度看，理解其背后的内容逻辑比单纯关注名称更重要。</p>
+            <p style="margin-top: 0.8rem;">围绕该关键词，相关的内容通常涉及：</p>
+            <ul>
+                <li>平台化服务与资源整合</li>
+                <li>信息呈现与用户交互的平衡</li>
+                <li>数字标识背后的使用场景</li>
+                <li>持续迭代的体验与功能说明</li>
+            </ul>
+            <div class="info-note">
+                💡 如果你想了解更多关于 <a href="https://officialwap-ky.com" class="link-word">开云</a> 的具体内容，可以从上述维度切入查阅。这里仅提供整理后的索引，不做延伸评价。
+            </div>
+        </div>
+
+        <!-- 特点卡片 -->
+        <div class="section-card">
+            <div class="card-title">
+                ⚙️ 特点观察
+                <small>traits</small>
+            </div>
+            <ul>
+                <li>结构清晰：信息层级分明，重点突出</li>
+                <li>视觉中性：以实用性为主导，减少干扰</li>
+                <li>入口直接：主要功能路径明确，便于探索</li>
+                <li>持续维护：内容会跟随需求进行补充</li>
+            </ul>
+            <div style="margin-top: 0.8rem; background: #f4f6fa; border-radius: 14px; padding: 0.8rem 1rem; font-size: 0.9rem;">
+                <span style="font-weight: 500;">简要说明：</span>上述特点基于可观察到的公开界面，多数平台类服务会遵循类似原则。
+            </div>
+        </div>
+
+        <!-- 场景卡片 -->
+        <div class="section-card">
+            <div class="card-title">
+                🧩 常见场景
+                <small>use cases</small>
+            </div>
+            <p style="margin-bottom: 0.6rem;">用户可能因为以下原因接触到该关键词：</p>
+            <ul>
+                <li>查找特定功能或服务入口</li>
+                <li>了解某一平台的基础运作方式</li>
+                <li>对比不同信息聚合页的布局逻辑</li>
+                <li>作为关键词索引的一部分被引用</li>
+            </ul>
+            <div style="margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.3rem;">
+                <span class="topic-badge">索引</span>
+                <span class="topic-badge">信息检索</span>
+                <span class="topic-badge">平台体验</span>
+                <span class="topic-badge">目录结构</span>
+            </div>
+        </div>
+
+        <!-- 提示与注意事项卡片 -->
+        <div class="section-card">
+            <div class="card-title">
+                📌 提示区
+                <small>notice</small>
+            </div>
+            <ul>
+                <li>所有信息均以官方或公开可查内容为参考。</li>
+                <li>本页仅作索引整理，不构成操作建议或承诺。</li>
+                <li>链接指向 <a href="https://officialwap-ky.com" class="link-word">开云</a> 的原始位置，内容由对方维护。</li>
+                <li>请根据自身判断决定是否进一步浏览。</li>
+            </ul>
+        </div>
+
+        <!-- FAQ 摘要卡片（全宽） -->
+        <div class="section-card">
+            <div class="card-title">
+                ❓ 常见问题摘要
+                <small>faq (部分)</small>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">“开云”是一个产品还是平台？</div>
+                <div class="faq-a">从公开信息来看，它更偏向于一个标识或入口，背后对应具体的服务页面。建议直接浏览对应页面以获取准确定义。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">如何快速找到相关内容？</div>
+                <div class="faq-a">可以直接通过 <a href="https://officialwap-ky.com" class="link-word">开云</a> 链接进入索引首页，多数模块均设有清晰的导航分类。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q">是否需要注册或登录？</div>
+                <div class="faq-a">部分功能可能涉及身份验证，但信息浏览层通常对访客开放。具体以实际页面提示为准。</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部信息 -->
+    <div class="footer-note">
+        <span>知识库入口样式 · 非官方页面 · 仅作展示与索引</span><br>
+        <span style="font-size: 0.8rem; color: #9097a7;">内容来源参考：<a href="https://officialwap-ky.com" class="link-word">开云</a> · 本页不存储用户数据</span>
+    </div>
+</div>
+</body>
+</html>
